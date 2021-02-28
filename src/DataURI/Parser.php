@@ -23,7 +23,6 @@ namespace DataURI;
 
 use DataURI\Exception\InvalidDataException;
 use DataURI\Exception\InvalidArgumentException;
-use DataURI\Data;
 
 /**
  * @author      Nicolas Le Goff
@@ -38,7 +37,7 @@ class Parser
      * offset #2 Parameters
      * offset #3 Datas
      */
-    const DATA_URI_REGEXP = '/data:([a-zA-Z-\/+]+)([a-zA-Z0-9-_;=.+]+)?,(.*)/';
+    const DATA_URI_REGEXP = '/data:([a-zA-Z-\/+.]*)([a-zA-Z0-9-_;=.+]+)?,(.*)/';
 
     /**
      * Parse a data URI and return a DataUri\Data
@@ -60,7 +59,7 @@ class Parser
 
         $base64 = false;
 
-        $mimeType = $matches[1];
+        $mimeType = $matches[1] ? $matches[1] : null;
         $params = $matches[2];
         $rawData = $matches[3];
 
